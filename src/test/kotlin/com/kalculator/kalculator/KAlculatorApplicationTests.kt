@@ -49,4 +49,40 @@ class CalculatorControllerTest {
         assertEquals("index", result)
         assertEquals(expectedResult, model["resultado"])
     }
+
+	@Test
+    fun testAdd() {
+        val result = calculatorService.add(5.0, 3.0)
+        assertEquals(8.0, result)
+    }
+
+    @Test
+    fun testSubtract() {
+        val result = calculatorService.subtract(5.0, 3.0)
+        assertEquals(2.0, result)
+    }
+
+    @Test
+    fun testMultiply() {
+        val result = calculatorService.multiply(5.0, 3.0)
+        assertEquals(15.0, result)
+    }
+
+    @ParameterizedTest
+    @CsvSource(
+        "6.0, 2.0, 3.0",
+        "9.0, 3.0, 3.0",
+        "12.0, 4.0, 3.0",
+    )
+    fun testDivide(num1: Double, num2: Double, expected: Double) {
+        val result = calculatorService.divide(num1, num2)
+        assertEquals(expected, result)
+    }
+
+    @Test
+    fun testDivideByZero() {
+        assertFailsWith<IllegalArgumentException> {
+            calculatorService.divide(6.0, 0.0)
+        }
+
 }
