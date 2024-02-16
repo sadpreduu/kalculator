@@ -1,1 +1,21 @@
+version: '3.8'
+
 services:
+  sua-app:
+    image: kotlin_rocket:latest
+    ports:
+      - "8080:8080"
+    environment:
+      - SPRING_PROFILES_ACTIVE=prod
+    depends_on:
+      - mysql_one
+
+  mysql_one:
+    image: mysql:latest
+    environment:
+      - MYSQL_ROOT_PASSWORD=255080-root
+      - MYSQL_DATABASE=kalculator_db
+      - MYSQL_USER=root
+      - MYSQL_PASSWORD=355080
+    ports:
+      - "3306:3306"
